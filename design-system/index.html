@@ -1,0 +1,424 @@
+<title>First Bites Design System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-bg:#161826; --color-surface:#232532; --color-text:#e9e9ed;
+  --color-divider:color-mix(in srgb,#e9e9ed 16%,transparent);
+  --ink-70:color-mix(in srgb,#e9e9ed 70%,transparent);
+  --ink-55:color-mix(in srgb,#e9e9ed 55%,transparent);
+  --ink-45:color-mix(in srgb,#e9e9ed 45%,transparent);
+  --color-accent:#9184d9; --color-accent-100:#f5f4ff; --color-accent-200:#e7e5fe;
+  --color-accent-300:#d2cefd; --color-accent-400:#b5abfc; --color-accent-500:#968ae0;
+  --color-accent-600:#796cbf; --color-accent-700:#5d5294; --color-accent-800:#423a6a; --color-accent-900:#2b2741;
+  --color-neutral-100:#f3f5fe; --color-neutral-200:#e4e7f5; --color-neutral-300:#cfd3e5;
+  --color-neutral-400:#b2b6ca; --color-neutral-500:#9397ab; --color-neutral-600:#75798c;
+  --color-neutral-700:#595d6c; --color-neutral-800:#3f424d; --color-neutral-900:#292b31;
+  --color-danger:#d9736a; --color-danger-hover:#e08a82; --color-danger-ink:#1b1015;
+  --color-danger-100:#f6dedb; --color-danger-300:#f0aaa2; --color-danger-400:#eaa8a1;
+  --color-success:#5fae87; --color-success-300:#9fd6bb;
+  --color-caution:#d0a05c; --color-caution-300:#e6c48d;
+  --color-section:#262a60; --color-section-glow:#353b80;
+  --font-heading:"Inter",system-ui,sans-serif; --font-body:"Inter",system-ui,sans-serif;
+  --s1:2.8px; --s2:5.6px; --s3:8.4px; --s4:11.2px; --s6:16.8px; --s8:22.4px;
+  --radius-sm:4px; --radius-md:8px; --radius-lg:14px;
+  --shadow-sm:0 0 0 1px #3f424d;
+  --shadow-md:0 0 0 1px #595d6c,0 6px 18px rgba(0,0,0,.55);
+  --shadow-lg:0 0 0 1px #9397ab,0 16px 40px rgba(0,0,0,.65);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--color-bg);color:var(--color-text);
+  font-family:var(--font-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-heading);font-weight:500;line-height:1.14;letter-spacing:-.015em;text-wrap:balance}
+p{margin:0}
+a{color:var(--color-accent);text-decoration:none}
+svg.ic{width:1em;height:1em}
+a:hover{color:var(--color-accent-400)}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+::selection{background:color-mix(in srgb,var(--color-accent) 30%,transparent)}
+@keyframes fb-halo{0%,100%{box-shadow:0 0 0 0 rgba(217,115,106,.28)}50%{box-shadow:0 0 0 7px rgba(217,115,106,0)}}
+@keyframes fb-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* layout */
+.wrap{max-width:940px;margin:0 auto;padding:0 var(--s6)}
+.hr{height:1px;border:0;margin:0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)}
+
+/* hero */
+header.hero{position:relative;overflow:hidden;padding:74px 0 60px;
+  background:
+    radial-gradient(120% 100% at 12% -10%,color-mix(in srgb,var(--color-accent) 22%,transparent),transparent 55%),
+    radial-gradient(90% 90% at 100% 0%,color-mix(in srgb,var(--color-section) 60%,transparent),transparent 60%);}
+.hero .kick{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-300);margin-bottom:var(--s4)}
+.hero h1{font-size:clamp(40px,7vw,66px);line-height:1.02;letter-spacing:-.03em}
+.hero h1 .dim{color:var(--ink-55)}
+.hero p.lede{max-width:60ch;margin-top:var(--s4);font-size:17px;color:var(--ink-70);line-height:1.5}
+.brandmark{width:46px;height:46px;border-radius:12px;background:var(--color-accent-800);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-accent) 50%,transparent);
+  display:grid;place-items:center;color:var(--color-accent-300);margin-bottom:var(--s6)}
+
+/* section scaffold */
+section{padding:52px 0}
+.eyebrow{display:flex;align-items:baseline;gap:12px;margin-bottom:var(--s6)}
+.eyebrow .num{font-size:12px;font-variant-numeric:tabular-nums;color:var(--color-accent);letter-spacing:.1em}
+.eyebrow h2{font-size:29px}
+.eyebrow .note{margin-left:auto;font-size:13px;color:var(--ink-55);max-width:34ch;text-align:right}
+.lead{max-width:64ch;color:var(--ink-70);margin-bottom:var(--s8);font-size:15px}
+
+/* swatch grids */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--s4)}
+.sw{border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);background:var(--color-surface)}
+.sw .chip{height:66px}
+.sw .meta{padding:8px 10px 10px}
+.sw .name{font-size:12.5px;font-weight:500}
+.sw .hex{font-size:11px;color:var(--ink-55);font-variant-numeric:tabular-nums;text-transform:uppercase}
+.sw .use{font-size:10.5px;color:var(--ink-45);margin-top:2px;line-height:1.35}
+
+.ramp{display:flex;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)}
+.ramp span{flex:1;height:46px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-size:9px;color:rgba(0,0,0,.5);font-variant-numeric:tabular-nums}
+.ramp span.dk{color:rgba(255,255,255,.6)}
+.ramp-label{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-55);margin:0 0 5px}
+
+/* semantic cards */
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--s4)}
+.sem{border-radius:var(--radius-lg);padding:var(--s6);position:relative;overflow:hidden}
+.sem h3{font-size:16px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.sem .role{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.8;margin-bottom:var(--s4)}
+.sem p{font-size:13px;line-height:1.5}
+.sem .swrow{display:flex;gap:6px;margin-top:var(--s4)}
+.sem .swrow i{width:26px;height:26px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.sem-danger{background:color-mix(in srgb,var(--color-danger) 12%,var(--color-surface));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-danger) 34%,transparent)}
+.sem-danger h3{color:var(--color-danger-100)} .sem-danger .role,.sem-danger p{color:var(--color-danger-300)}
+.sem-success{background:color-mix(in srgb,var(--color-success) 12%,var(--color-surface));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-success) 34%,transparent)}
+.sem-success h3,.sem-success .role,.sem-success p{color:var(--color-success-300)}
+.sem-caution{background:color-mix(in srgb,var(--color-caution) 12%,var(--color-surface));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-caution) 34%,transparent)}
+.sem-caution h3,.sem-caution .role,.sem-caution p{color:var(--color-caution-300)}
+
+/* type scale */
+.type-row{display:flex;align-items:baseline;gap:var(--s6);padding:var(--s3) 0;border-bottom:1px solid transparent;
+  background:linear-gradient(to right,transparent,color-mix(in srgb,var(--color-text) 8%,transparent) 0,color-mix(in srgb,var(--color-text) 8%,transparent) calc(100% - 48px),transparent) no-repeat bottom/100% 1px}
+.type-row .lbl{flex:none;width:110px;font-size:11px;color:var(--ink-45);font-variant-numeric:tabular-nums}
+.type-row .spec{margin-left:auto;flex:none;font-size:11px;color:var(--ink-45);font-variant-numeric:tabular-nums}
+
+/* component demo panel */
+.panel{background:var(--color-surface);border-radius:var(--radius-lg);padding:var(--s8);box-shadow:var(--shadow-sm);display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center}
+.panel + .cap{font-size:12px;color:var(--ink-45);margin-top:var(--s3)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--s6);align-items:start}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;text-decoration:none;
+  font-family:var(--font-heading);font-weight:500;font-size:14px;line-height:1.2;color:var(--color-text);
+  background:transparent;border:1px solid transparent;padding:var(--s2) calc(var(--s3)*1.2);border-radius:var(--radius-md)}
+.btn-primary{color:var(--color-accent);border-color:var(--color-accent)}
+.btn-primary:hover{background:color-mix(in srgb,var(--color-accent) 12%,transparent)}
+.btn-secondary{border-color:var(--color-divider)}
+.btn-secondary:hover{background:color-mix(in srgb,var(--color-text) 7%,transparent)}
+.btn-ghost{color:var(--color-accent);padding-inline:var(--s1)}
+.btn-ghost:hover{background:color-mix(in srgb,var(--color-accent) 10%,transparent)}
+.btn-danger{background:var(--color-danger);color:var(--color-danger-ink);font-weight:600}
+.btn-danger:hover{background:var(--color-danger-hover)}
+.btn-icon{width:36px;height:36px;padding:0}
+
+/* pills / tags */
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:.02em;padding:3px 10px;border-radius:6px}
+.tag-accent{background:var(--color-accent-800);color:var(--color-accent-100)}
+.tag-neutral{background:var(--color-neutral-800);color:var(--color-neutral-100)}
+.tag-danger{background:color-mix(in srgb,var(--color-danger) 20%,transparent);color:var(--color-danger-100)}
+.tag-success{background:color-mix(in srgb,var(--color-success) 18%,transparent);color:var(--color-success-300)}
+.tag-caution{background:color-mix(in srgb,var(--color-caution) 18%,transparent);color:var(--color-caution-300)}
+
+/* status pills as used in-app */
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px 4px 8px;border-radius:999px;font-size:12.5px;background:var(--color-surface);box-shadow:var(--shadow-sm)}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+
+/* input */
+.field label{display:block;font-size:12px;margin-bottom:5px;color:var(--ink-70)}
+.input{width:100%;min-height:36px;padding:6px 10px;font:inherit;font-size:14px;color:var(--color-text);
+  caret-color:var(--color-accent);background:var(--color-bg);border:1px solid var(--color-divider);border-radius:var(--radius-md)}
+.input:focus-visible{border-color:var(--color-accent);outline-offset:0}
+.seg{display:inline-flex;overflow:hidden;border:1px solid var(--color-divider);border-radius:var(--radius-md)}
+.seg-opt{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;font-size:13px;cursor:pointer;color:var(--ink-70)}
+.seg-opt+.seg-opt{border-left:1px solid var(--color-divider)}
+.seg-opt.on{color:var(--color-accent);box-shadow:inset 0 0 0 1px var(--color-accent)}
+
+/* app-fragment: alert bar */
+.alert{display:flex;align-items:center;gap:10px;padding:7px 8px 7px 12px;border-radius:10px;
+  background:color-mix(in srgb,var(--color-danger) 10%,transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-danger) 34%,transparent)}
+.alert .txt{font-size:12.5px;color:var(--color-danger-100);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.alert .call{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;background:var(--color-danger);color:var(--color-danger-ink);font-weight:600;font-size:13px;padding:6px 12px;border-radius:8px;animation:fb-halo 3.4s ease-in-out infinite;text-decoration:none}
+
+/* dose card fragment */
+.dose{background:var(--color-surface);border-radius:var(--radius-lg);padding:var(--s6);box-shadow:var(--shadow-sm);max-width:340px}
+.dose .kick{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--s2)}
+.dose .allergen{display:flex;align-items:center;gap:10px;margin-bottom:var(--s4)}
+.dose .ic{width:38px;height:38px;border-radius:10px;background:var(--color-accent-800);color:var(--color-accent-300);display:grid;place-items:center;flex:none}
+.dose h3{font-size:20px}
+.dose .sub{font-size:12px;color:var(--ink-55)}
+.timer{display:flex;align-items:center;gap:10px;margin-top:var(--s4);padding:var(--s3);border-radius:var(--radius-md);background:color-mix(in srgb,var(--color-success) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-success) 30%,transparent)}
+.timer .t{font-size:22px;font-weight:600;color:var(--color-success-300);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.timer .lab{font-size:11px;color:var(--color-success-300);opacity:.85;line-height:1.3}
+
+/* token table */
+.tok{width:100%;border-collapse:collapse;font-size:13px}
+.tok td{padding:var(--s2) var(--s3);border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%,transparent);vertical-align:middle}
+.tok td:first-child{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--color-accent-300);white-space:nowrap}
+.tok td:last-child{color:var(--ink-55)}
+.tok .cell{display:flex;align-items:center;gap:8px}
+.tok .box{width:20px;height:20px;border-radius:5px;flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+
+/* do/don't */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6)}
+.rules ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--s3)}
+.rules li{display:flex;gap:9px;font-size:13.5px;line-height:1.45;color:var(--ink-70)}
+.rules li i{flex:none;margin-top:2px}
+.rules .do i{color:var(--color-success-300)}
+.rules .dont i{color:var(--color-danger-300)}
+.rules h3{font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--s4);color:var(--ink-45)}
+
+footer{padding:48px 0 64px;color:var(--ink-45);font-size:12.5px;text-align:center}
+footer .disc{max-width:52ch;margin:0 auto var(--s4);line-height:1.5}
+
+@media (max-width:640px){
+  .eyebrow{flex-wrap:wrap} .eyebrow .note{margin-left:0;text-align:left;max-width:none}
+  .rules{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<g id="def" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></g>
+<symbol id="ic-heartbeat" viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 9 2-4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="ic-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="ic-check" viewBox="0 0 24 24"><path d="M5 12.5l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="ic-warning" viewBox="0 0 24 24"><path d="M12 3.5L21.5 20H2.5L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9.5v4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1.1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="ic-warning-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1.1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="ic-x-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="ic-phone-call" viewBox="0 0 24 24"><path d="M6.5 4.5c-1 0-2 .9-2 2 0 7 6 13 13 13 1.1 0 2-1 2-2v-2.3l-3.7-1.4-1.6 1.9c-2.4-1.1-4.3-3-5.4-5.4l1.9-1.6L9.8 4.5H6.5z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="ic-cards" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 3.5h10a2 2 0 012 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="ic-list-checks" viewBox="0 0 24 24"><path d="M4 7l1.5 1.5L8.5 5.5M4 16l1.5 1.5L8.5 14M12 7h8M12 16h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="ic-egg" viewBox="0 0 24 24"><path d="M12 3.5c3.3 0 6 4.7 6 8.7a6 6 0 11-12 0c0-4 2.7-8.7 6-8.7z" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brandmark">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><ellipse cx="12" cy="4.9" rx="2.5" ry="3.4"></ellipse><ellipse cx="6.4" cy="15.4" rx="4.1" ry="1.35" transform="rotate(-12 6.4 15.4)"></ellipse><ellipse cx="17.6" cy="15.4" rx="4.1" ry="1.35" transform="rotate(12 17.6 15.4)"></ellipse><path d="M12 8.3 V 21.5" stroke-width="2.2"></path></svg>
+    </div>
+    <div class="kick"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-heartbeat"/></svg>Bows and Spoons · First Bites</div>
+    <h1>First Bites<br><span class="dim">Design System</span></h1>
+    <p class="lede">The design language of a home infant-allergy protocol app. A quiet, dense dark interface — Inter, an 8px grid, a single blurple accent used as line and glow — carrying a three-voice health-status palette where colour tells a parent to <strong style="color:var(--color-success-300);font-weight:600">carry on</strong>, <strong style="color:var(--color-caution-300);font-weight:600">watch closely</strong>, or <strong style="color:var(--color-danger-300);font-weight:600">call 911</strong>.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- 01 FOUNDATION -->
+<section>
+  <div class="eyebrow"><span class="num">01</span><h2>Ground &amp; ink</h2><span class="note">A near-neutral blue-grey world. No pure black, no pure white.</span></div>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#161826"></div><div class="meta"><div class="name">Background</div><div class="hex">#161826</div><div class="use">App ground</div></div></div>
+    <div class="sw"><div class="chip" style="background:#232532"></div><div class="meta"><div class="name">Surface</div><div class="hex">#232532</div><div class="use">Cards, inputs, chips</div></div></div>
+    <div class="sw"><div class="chip" style="background:#e9e9ed"></div><div class="meta"><div class="name">Text</div><div class="hex">#E9E9ED</div><div class="use">Primary ink</div></div></div>
+    <div class="sw"><div class="chip" style="background:#9184d9"></div><div class="meta"><div class="name">Accent</div><div class="hex">#9184D9</div><div class="use">Blurple — line &amp; glow</div></div></div>
+    <div class="sw"><div class="chip" style="background:#3f424d"></div><div class="meta"><div class="name">Border</div><div class="hex">#3F424D</div><div class="use">Neutral-800 hairline</div></div></div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- 02 SEMANTICS -->
+<section>
+  <div class="eyebrow"><span class="num">02</span><h2>Health-status semantics</h2><span class="note">The layer that makes this a medical companion, not a to-do list.</span></div>
+  <p class="lead">Three voices, each a first-class role — never the accent, never each other. A parent reads the colour before the words. Every screen speaks them the same way: a filled danger button, a tinted danger surface with a hairline edge, light-step text on that surface.</p>
+  <div class="sem-grid">
+    <div class="sem sem-success">
+      <div class="role">Safe · tolerated</div>
+      <h3><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-check-circle"/></svg>Success</h3>
+      <p>Dose taken, watch window clear, no reaction. Sage green — reassuring without shouting.</p>
+      <div class="swrow"><i style="background:#5fae87"></i><i style="background:#9fd6bb"></i></div>
+    </div>
+    <div class="sem sem-caution">
+      <div class="role">Mild · watch</div>
+      <h3><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-warning"/></svg>Caution</h3>
+      <p>Mild reaction, review pending, watch-window running. Amber — attention, not alarm.</p>
+      <div class="swrow"><i style="background:#d0a05c"></i><i style="background:#e6c48d"></i></div>
+    </div>
+    <div class="sem sem-danger">
+      <div class="role">Severe · emergency</div>
+      <h3><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-warning-circle"/></svg>Danger</h3>
+      <p>Reaction plan, 911, severe symptoms. Coral red — the loudest voice, reserved for it.</p>
+      <div class="swrow"><i style="background:#d9736a"></i><i style="background:#eaa8a1"></i><i style="background:#f6dedb"></i></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- 03 RAMPS -->
+<section>
+  <div class="eyebrow"><span class="num">03</span><h2>Tonal ramps</h2><span class="note">Generated in OKLCH on one shared lightness scale.</span></div>
+  <p class="lead">Contrast comes from value, not saturation. On this dark ground use 700–900 for tinted fills and borders, 500 as the base, 100–300 for text on those tints.</p>
+  <div style="display:flex;flex-direction:column;gap:var(--s6)">
+    <div><div class="ramp-label"><span>Neutral</span><span>100 → 900</span></div><div class="ramp">
+      <span>100</span><span>200</span><span class="dk">300</span><span class="dk">400</span><span class="dk">500</span><span class="dk">600</span><span class="dk">700</span><span class="dk">800</span><span class="dk">900</span>
+    </div></div>
+    <div><div class="ramp-label"><span>Accent (blurple)</span><span>100 → 900</span></div><div class="ramp" id="rampAccent"></div></div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- 04 TYPE -->
+<section>
+  <div class="eyebrow"><span class="num">04</span><h2>Typography</h2><span class="note">Inter over Inter. Hierarchy is size and space, never weight past 500.</span></div>
+  <div>
+    <div class="type-row"><div style="font-size:42px;line-height:1.1;letter-spacing:-.015em">Baby profile</div><div class="spec">42 / 500 · h1</div></div>
+    <div class="type-row"><div style="font-size:32px;letter-spacing:-.015em">Today's dose</div><div class="spec">32 / 500 · h2</div></div>
+    <div class="type-row"><div style="font-size:25px">Egg — dose 2 of 3</div><div class="spec">25 / 500 · h3</div></div>
+    <div class="type-row"><div style="font-size:20px">Watch window</div><div class="spec">20 / 500 · h4</div></div>
+    <div class="type-row"><div style="font-size:15px;font-weight:400">Body — 15px at 1.55 line-height carries the diary, guidance and notes at a comfortable reading measure near 65 characters.</div><div class="spec">15 / 400 · body</div></div>
+    <div class="type-row"><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-55)">Kit&nbsp;#4B-2291</div><div class="spec">11 / 500 · label</div></div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- 05 COMPONENTS -->
+<section>
+  <div class="eyebrow"><span class="num">05</span><h2>Components</h2><span class="note">Outlined actions, tinted status, native controls — no browser defaults.</span></div>
+
+  <div class="grid2" style="margin-bottom:var(--s8)">
+    <div>
+      <div class="panel">
+        <button class="btn btn-primary"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-check"/></svg>Mark taken</button>
+        <button class="btn btn-secondary">Skip</button>
+        <button class="btn btn-ghost">Details</button>
+        <button class="btn btn-icon btn-secondary"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-plus"/></svg></button>
+      </div>
+      <div class="cap">Buttons — primary is an accent <em>outline</em>, never a fill.</div>
+    </div>
+    <div>
+      <div class="panel">
+        <button class="btn btn-danger"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-phone-call"/></svg>Call 911</button>
+        <span class="tag tag-danger"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-warning-circle"/></svg>Severe</span>
+        <span class="tag tag-caution">Mild</span>
+        <span class="tag tag-success">Tolerated</span>
+      </div>
+      <div class="cap">The one filled button in the system is danger — because it must win.</div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:var(--s8)">
+    <div>
+      <div class="panel" style="gap:var(--s3)">
+        <span class="status-pill"><span class="dot" style="background:var(--color-success)"></span>No reaction</span>
+        <span class="status-pill"><span class="dot" style="background:var(--color-caution)"></span>Mild — watching</span>
+        <span class="status-pill"><span class="dot" style="background:var(--color-danger)"></span>Reaction logged</span>
+      </div>
+      <div class="cap">Status pills — a coloured dot does the work; the surface stays neutral.</div>
+    </div>
+    <div>
+      <div class="panel" style="flex-direction:column;align-items:stretch;gap:var(--s4)">
+        <div class="field"><label>Baby's name</label><input class="input" value="Mira" readonly></div>
+        <div class="seg"><span class="seg-opt on"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-cards"/></svg>Focus</span><span class="seg-opt"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-list-checks"/></svg>Checklist</span></div>
+      </div>
+      <div class="cap">Forms — native inputs, themed states, accent caret and focus ring.</div>
+    </div>
+  </div>
+
+  <!-- app fragments -->
+  <div class="alert" style="margin-bottom:var(--s8)">
+    <svg class="ic" style="color:var(--color-danger);font-size:17px;flex:none;width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-warning-circle"/></svg>
+    <span class="txt">Trouble breathing, swelling lips, floppy baby — <strong style="color:var(--color-danger-100);font-weight:600">call 911 now</strong>.</span>
+    <a class="call" href="#"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-phone-call"/></svg>911</a>
+  </div>
+  <div class="cap" style="margin-top:calc(var(--s8) * -1 + 4px);margin-bottom:var(--s8)">Emergency bar — pinned to every screen, the halo pulse drawing the eye without motion sickness.</div>
+
+  <div class="dose">
+    <div class="kick">Today · Day 12</div>
+    <div class="allergen">
+      <div class="ic"><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-egg"/></svg></div>
+      <div><h3>Egg</h3><div class="sub">Dose 2 of 3 · ¼ teaspoon</div></div>
+    </div>
+    <div class="timer">
+      <svg class="ic" style="color:var(--color-success-300);font-size:20px;width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-clock"/></svg>
+      <div class="t">1:47:20</div>
+      <div class="lab">Watch window<br>clear so far</div>
+    </div>
+  </div>
+  <div class="cap">Dose focus card with the live two-hour watch-window timer — success-tinted while clear.</div>
+</section>
+
+<div class="hr"></div>
+
+<!-- 06 TOKENS -->
+<section>
+  <div class="eyebrow"><span class="num">06</span><h2>Token reference</h2><span class="note">Wire these into product code; retune the look in one place.</span></div>
+  <div class="grid2">
+    <table class="tok"><tbody>
+      <tr><td>--color-bg</td><td><div class="cell"><span class="box" style="background:#161826"></span>#161826</div></td></tr>
+      <tr><td>--color-surface</td><td><div class="cell"><span class="box" style="background:#232532"></span>#232532</div></td></tr>
+      <tr><td>--color-text</td><td><div class="cell"><span class="box" style="background:#e9e9ed"></span>#E9E9ED</div></td></tr>
+      <tr><td>--color-accent</td><td><div class="cell"><span class="box" style="background:#9184d9"></span>#9184D9</div></td></tr>
+      <tr><td>--color-danger</td><td><div class="cell"><span class="box" style="background:#d9736a"></span>#D9736A</div></td></tr>
+      <tr><td>--color-success</td><td><div class="cell"><span class="box" style="background:#5fae87"></span>#5FAE87</div></td></tr>
+      <tr><td>--color-caution</td><td><div class="cell"><span class="box" style="background:#d0a05c"></span>#D0A05C</div></td></tr>
+    </tbody></table>
+    <table class="tok"><tbody>
+      <tr><td>--font-body / heading</td><td>Inter · 400 / 500</td></tr>
+      <tr><td>--space-3 / 6 / 8</td><td>8.4 · 16.8 · 22.4px&nbsp; (0.70× density)</td></tr>
+      <tr><td>--radius-sm / md / lg</td><td>4 · 8 · 14px</td></tr>
+      <tr><td>--radius-pill</td><td>999px&nbsp; (chips, pills)</td></tr>
+      <tr><td>--shadow-sm / md / lg</td><td>edge + ambient darkness</td></tr>
+      <tr><td>fb-halo</td><td>3.4s emergency pulse</td></tr>
+      <tr><td>fb-rise</td><td>8px enter, opacity</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- 07 PRINCIPLES -->
+<section>
+  <div class="eyebrow"><span class="num">07</span><h2>Do &amp; don't</h2></div>
+  <div class="rules">
+    <div class="do">
+      <h3>Do</h3>
+      <ul>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-check-circle"/></svg>Reserve each semantic voice for its meaning — danger is the emergency, never a highlight.</li>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-check-circle"/></svg>Outline primary actions; let the accent live in lines, focus rings and glow.</li>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-check-circle"/></svg>Lean on the ramps for surfaces, borders and muted text — value carries hierarchy.</li>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-check-circle"/></svg>Keep the compact 0.70× spacing; this interface is dense on purpose.</li>
+      </ul>
+    </div>
+    <div class="dont">
+      <h3>Don't</h3>
+      <ul>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-x-circle"/></svg>Flood large areas with the accent or any saturated fill.</li>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-x-circle"/></svg>Use pure black or white, or bolden headings past 500.</li>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-x-circle"/></svg>Style a status with the accent, or borrow one semantic's colour for another.</li>
+        <li><svg class="ic" style="width:1em;height:1em;display:inline-block;vertical-align:-0.13em" aria-hidden="true"><use href="#ic-x-circle"/></svg>Stack heavy shadows; elevation here is a hairline edge plus ambient darkness.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="disc"><strong style="color:var(--ink-70)">Not a medical device.</strong> This companion app does not diagnose allergy. Clinician instructions always take precedence over anything shown in the app.</div>
+    First Bites Design System · built on the Nocturne foundation · tokens in <code style="color:var(--color-accent-300)">design-system/tokens.css</code>
+  </div>
+</footer>
+
+<script>
+// Build the accent ramp from the real token steps
+const accent=["#f5f4ff","#e7e5fe","#d2cefd","#b5abfc","#968ae0","#796cbf","#5d5294","#423a6a","#2b2741"];
+const el=document.getElementById('rampAccent');
+accent.forEach((c,i)=>{const s=document.createElement('span');s.style.background=c;s.textContent=(i+1)+"00";if(i>=3)s.className='dk';el.appendChild(s);});
+</script>

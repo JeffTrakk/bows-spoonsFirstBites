@@ -1,0 +1,118 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   First Bites — design tokens
+   ─────────────────────────────────────────────────────────────────────────
+   The complete, canonical token set for the Bows and Spoons First Bites app.
+
+   It builds on the existing "Nocturne" foundation (dark blue-grey ground,
+   Inter at medium weight, a single blurple accent used as line and glow) and
+   adds the layer Nocturne never documented but the app depends on: the
+   HEALTH-STATUS semantic colors. In a home infant-allergy protocol, colour
+   is not decoration — it is the difference between "carry on", "watch this"
+   and "call 911". Those three voices live here as first-class roles so every
+   screen speaks them the same way.
+
+   Source of truth. Retune the look here; never hard-code a hex, font or px a
+   token already carries.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Ground & ink ─────────────────────────────────────────────────── */
+  --color-bg:       #161826;  /* app ground — near-neutral blue-grey */
+  --color-surface:  #232532;  /* raised cards, inputs, chips          */
+  --color-text:     #e9e9ed;  /* primary ink                          */
+  --color-divider:  color-mix(in srgb, #e9e9ed 16%, transparent);
+
+  /* Ink at documented opacities — the app leans on these constantly. */
+  --ink-90: color-mix(in srgb, var(--color-text) 90%, transparent);
+  --ink-70: color-mix(in srgb, var(--color-text) 70%, transparent);
+  --ink-55: color-mix(in srgb, var(--color-text) 55%, transparent);
+  --ink-45: color-mix(in srgb, var(--color-text) 45%, transparent);
+  --ink-38: color-mix(in srgb, var(--color-text) 38%, transparent);
+
+  /* ── Accent — blurple, the product's Pro-accent hue ───────────────── */
+  --color-accent:   #9184d9;
+  --color-accent-100: #f5f4ff;
+  --color-accent-200: #e7e5fe;
+  --color-accent-300: #d2cefd;  /* accent text on dark tints           */
+  --color-accent-400: #b5abfc;  /* link hover / pressed on dark ground */
+  --color-accent-500: #968ae0;  /* base                                */
+  --color-accent-600: #796cbf;
+  --color-accent-700: #5d5294;
+  --color-accent-800: #423a6a;  /* tinted fills (badges, brand mark)   */
+  --color-accent-900: #2b2741;
+
+  /* ── Neutral ramp — surfaces, borders, muted text ─────────────────── */
+  --color-neutral-100: #f3f5fe;
+  --color-neutral-200: #e4e7f5;
+  --color-neutral-300: #cfd3e5;
+  --color-neutral-400: #b2b6ca;
+  --color-neutral-500: #9397ab;
+  --color-neutral-600: #75798c;
+  --color-neutral-700: #595d6c;
+  --color-neutral-800: #3f424d;  /* the workhorse hairline / border    */
+  --color-neutral-900: #292b31;
+
+  /* ════════════════════════════════════════════════════════════════════
+     HEALTH-STATUS SEMANTICS — the First Bites layer
+     Three voices, each a full role. Use the *role* tokens below in product
+     code so a status can be restyled in one place; the numbered steps exist
+     for fine control. Semantics are NOT the accent — never swap one for it.
+     ════════════════════════════════════════════════════════════════════ */
+
+  /* DANGER / EMERGENCY — coral red. Reaction plan, 911, severe symptoms. */
+  --color-danger:        #d9736a;  /* base — the 911 button, alert edge  */
+  --color-danger-hover:  #e08a82;  /* interactive hover                  */
+  --color-danger-ink:    #1b1015;  /* text ON a filled danger surface    */
+  --color-danger-100:    #f6dedb;  /* strongest text on dark danger tint */
+  --color-danger-200:    #f3c9c4;
+  --color-danger-300:    #f0aaa2;  /* body text on dark danger tint      */
+  --color-danger-400:    #eaa8a1;  /* icon / label on dark danger tint   */
+  --color-danger-tint:   color-mix(in srgb, #d9736a 10%, transparent);   /* alert-bar fill  */
+  --color-danger-edge:   color-mix(in srgb, #d9736a 34%, transparent);   /* alert-bar hairline */
+
+  /* SUCCESS / SAFE — sage green. Dose taken, no reaction, tolerated.     */
+  --color-success:       #5fae87;  /* base                               */
+  --color-success-300:   #9fd6bb;  /* text / icon on dark ground         */
+  --color-success-tint:  color-mix(in srgb, #5fae87 12%, transparent);
+  --color-success-edge:  color-mix(in srgb, #5fae87 34%, transparent);
+
+  /* CAUTION / MILD — amber. Mild reaction, watch window, needs review.   */
+  --color-caution:       #d0a05c;  /* base                               */
+  --color-caution-300:   #e6c48d;  /* text / icon on dark ground         */
+  --color-caution-tint:  color-mix(in srgb, #d0a05c 12%, transparent);
+  --color-caution-edge:  color-mix(in srgb, #d0a05c 34%, transparent);
+
+  /* ── Deck / full-bleed presence grounds (slide & page scale only) ─── */
+  --color-section:       #262a60;
+  --color-section-glow:  #353b80;
+  --color-section-ghost: #4c5397;
+
+  /* ── Type ─────────────────────────────────────────────────────────── */
+  --font-heading: "Inter", system-ui, sans-serif;
+  --font-heading-weight: 500;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* ── Spacing — density 0.70×, on purpose ──────────────────────────── */
+  --space-1: 2.8px;
+  --space-2: 5.6px;
+  --space-3: 8.4px;
+  --space-4: 11.2px;
+  --space-6: 16.8px;
+  --space-8: 22.4px;
+
+  /* ── Radius ───────────────────────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;   /* profile chips, status pills                 */
+
+  /* ── Elevation — edge + ambient darkness on the dark ground ───────── */
+  --shadow-sm: 0 0 0 1px #3f424d;
+  --shadow-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0,0,0,0.55);
+  --shadow-lg: 0 0 0 1px #9397ab, 0 16px 40px rgba(0,0,0,0.65);
+  --shadow-inset-accent: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 50%, transparent);
+}
+
+/* ── Motion — the app's two signature animations ─────────────────────── */
+@keyframes fb-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes fb-halo { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,115,106,0.28); } 50% { box-shadow: 0 0 0 7px rgba(217,115,106,0); } }
