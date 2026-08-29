@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>First Bites Design System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Interactive component library for the Bows and Spoons First Bites infant-allergy app.">
+<meta name="theme-color" content="#161826">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23161826'/%3E%3Cg fill='none' stroke='%239184d9' stroke-width='1.4' stroke-linecap='round'%3E%3Cellipse cx='12' cy='6' rx='1.6' ry='2.2'/%3E%3Cellipse cx='8.3' cy='13' rx='2.6' ry='.9' transform='rotate(-12 8.3 13)'/%3E%3Cellipse cx='15.7' cy='13' rx='2.6' ry='.9' transform='rotate(12 15.7 13)'/%3E%3Cpath d='M12 8.2V18' stroke-width='1.6'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+/* ═══ Tokens — mirror of design-system/tokens.css (inlined so the showcase
+      deploys and previews with zero dependencies) ═══ */
+:root{
+  --color-bg:#161826; --color-surface:#232532; --color-surface-2:#2b2d3c; --color-text:#e9e9ed;
+  --color-divider:color-mix(in srgb,#e9e9ed 16%,transparent);
+  --ink-90:color-mix(in srgb,#e9e9ed 90%,transparent);
+  --ink-70:color-mix(in srgb,#e9e9ed 70%,transparent);
+  --ink-55:color-mix(in srgb,#e9e9ed 55%,transparent);
+  --ink-45:color-mix(in srgb,#e9e9ed 45%,transparent);
+  --ink-38:color-mix(in srgb,#e9e9ed 38%,transparent);
+  --color-accent:#9184d9; --color-accent-100:#f5f4ff; --color-accent-200:#e7e5fe;
+  --color-accent-300:#d2cefd; --color-accent-400:#b5abfc; --color-accent-500:#968ae0;
+  --color-accent-600:#796cbf; --color-accent-700:#5d5294; --color-accent-800:#423a6a; --color-accent-900:#2b2741;
+  --color-neutral-100:#f3f5fe; --color-neutral-200:#e4e7f5; --color-neutral-300:#cfd3e5;
+  --color-neutral-400:#b2b6ca; --color-neutral-500:#9397ab; --color-neutral-600:#75798c;
+  --color-neutral-700:#595d6c; --color-neutral-800:#3f424d; --color-neutral-900:#292b31;
+  --color-danger:#d9736a; --color-danger-hover:#e08a82; --color-danger-ink:#1b1015;
+  --color-danger-100:#f6dedb; --color-danger-300:#f0aaa2; --color-danger-400:#eaa8a1;
+  --color-danger-tint:color-mix(in srgb,#d9736a 10%,transparent); --color-danger-edge:color-mix(in srgb,#d9736a 34%,transparent);
+  --color-success:#5fae87; --color-success-300:#9fd6bb;
+  --color-success-tint:color-mix(in srgb,#5fae87 12%,transparent); --color-success-edge:color-mix(in srgb,#5fae87 34%,transparent);
+  --color-caution:#d0a05c; --color-caution-300:#e6c48d;
+  --color-caution-tint:color-mix(in srgb,#d0a05c 12%,transparent); --color-caution-edge:color-mix(in srgb,#d0a05c 34%,transparent);
+  --color-section:#262a60; --color-section-glow:#353b80;
+  --font-heading:"Inter",system-ui,sans-serif; --font-body:"Inter",system-ui,sans-serif;
+  --s1:2.8px; --s2:5.6px; --s3:8.4px; --s4:11.2px; --s6:16.8px; --s8:22.4px;
+  --radius-sm:4px; --radius-md:8px; --radius-lg:14px; --radius-pill:999px;
+  --shadow-sm:0 0 0 1px #3f424d;
+  --shadow-md:0 0 0 1px #595d6c,0 6px 18px rgba(0,0,0,.55);
+  --shadow-lg:0 0 0 1px #9397ab,0 16px 40px rgba(0,0,0,.65);
+  --nav-w:236px; --topbar-h:56px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--color-bg);color:var(--color-text);
+  font-family:var(--font-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-heading);font-weight:500;line-height:1.14;letter-spacing:-.015em;text-wrap:balance}
+p{margin:0}
+a{color:var(--color-accent);text-decoration:none}
+a:hover{color:var(--color-accent-400)}
+button{font:inherit;color:inherit}
+svg.ic{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex:none}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-radius:3px}
+::selection{background:color-mix(in srgb,var(--color-accent) 30%,transparent)}
+@keyframes fb-halo{0%,100%{box-shadow:0 0 0 0 rgba(217,115,106,.28)}50%{box-shadow:0 0 0 7px rgba(217,115,106,0)}}
+@keyframes fb-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes toast-in{from{opacity:0;transform:translateY(10px) translateX(-50%)}to{opacity:1;transform:translateY(0) translateX(-50%)}}
+
+/* ═══ Shell: top bar + sidebar + content ═══ */
+.topbar{position:sticky;top:0;z-index:40;height:var(--topbar-h);display:flex;align-items:center;gap:12px;
+  padding:0 16px;background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--color-divider)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:500;font-size:15px;letter-spacing:-.01em}
+.brand .mark{width:28px;height:28px;flex:none;border-radius:8px;background:var(--color-accent-800);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--color-accent) 50%,transparent);
+  display:grid;place-items:center;color:var(--color-accent-300)}
+.brand .sub{color:var(--ink-55)}
+.topbar .spacer{margin-left:auto}
+.topbar .ghost{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;
+  border:1px solid var(--color-divider);background:transparent;color:var(--ink-70);font-size:13px;cursor:pointer;text-decoration:none}
+.topbar .ghost:hover{background:color-mix(in srgb,var(--color-text) 7%,transparent);color:var(--color-text)}
+.menu-btn{display:none;width:38px;height:38px;border-radius:8px;border:1px solid var(--color-divider);
+  background:transparent;color:var(--color-text);cursor:pointer;place-items:center;font-size:19px}
+
+.layout{display:flex;align-items:flex-start}
+.sidebar{position:sticky;top:var(--topbar-h);width:var(--nav-w);flex:none;height:calc(100vh - var(--topbar-h));
+  overflow-y:auto;padding:20px 12px 40px;border-right:1px solid var(--color-divider)}
+.sidebar .grp{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);
+  padding:6px 12px;margin-top:12px}
+.sidebar .grp:first-child{margin-top:0}
+.sidebar a{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:8px;font-size:14px;color:var(--ink-70)}
+.sidebar a .ic{font-size:16px;color:var(--ink-45)}
+.sidebar a:hover{background:color-mix(in srgb,var(--color-text) 6%,transparent);color:var(--color-text)}
+.sidebar a.active{background:var(--color-accent-900);color:var(--color-accent-200)}
+.sidebar a.active .ic{color:var(--color-accent-300)}
+.scrim{display:none;position:fixed;inset:var(--topbar-h) 0 0;background:rgba(0,0,0,.5);z-index:30}
+
+.content{flex:1;min-width:0;max-width:900px;margin:0 auto;padding:0 20px 120px}
+
+/* ═══ Hero ═══ */
+.hero{padding:56px 0 40px;position:relative}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--color-accent-300);margin-bottom:16px}
+.hero h1{font-size:clamp(34px,8vw,54px);line-height:1.02;letter-spacing:-.03em}
+.hero h1 .dim{color:var(--ink-55)}
+.hero .lede{max-width:60ch;margin-top:16px;font-size:16px;color:var(--ink-70);line-height:1.55}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.stat-band{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:32px;border-radius:14px;overflow:hidden;
+  background:var(--color-divider);box-shadow:var(--shadow-sm)}
+.stat-band .cell{background:var(--color-bg);padding:16px 18px}
+.stat-band .n{font-size:26px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat-band .l{font-size:12px;color:var(--ink-55);margin-top:2px}
+
+/* ═══ Section scaffolding ═══ */
+section.sec{padding:44px 0;scroll-margin-top:calc(var(--topbar-h) + 12px)}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.sec-head .num{font-size:12px;color:var(--color-accent);font-variant-numeric:tabular-nums;letter-spacing:.1em;flex:none}
+.sec-head h2{font-size:26px}
+.sec-desc{max-width:64ch;color:var(--ink-70);margin:0 0 24px;font-size:14.5px}
+.hr{height:1px;border:0;margin:0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)}
+
+/* ═══ Demo card: preview + optional code ═══ */
+.demo{border:1px solid var(--color-divider);border-radius:14px;overflow:hidden;margin-bottom:20px;background:var(--color-surface)}
+.demo-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--color-divider)}
+.demo-head .t{font-size:13px;font-weight:500}
+.demo-head .t small{color:var(--ink-45);font-weight:400}
+.demo-head .tools{margin-left:auto;display:flex;gap:6px}
+.icon-btn{width:30px;height:30px;border-radius:7px;border:1px solid var(--color-divider);background:transparent;
+  color:var(--ink-55);cursor:pointer;display:grid;place-items:center;font-size:14px}
+.icon-btn:hover{background:color-mix(in srgb,var(--color-text) 7%,transparent);color:var(--color-text)}
+.icon-btn.on{color:var(--color-accent-300);border-color:color-mix(in srgb,var(--color-accent) 50%,transparent)}
+.demo-stage{padding:26px 22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+  background:radial-gradient(120% 120% at 0 0,color-mix(in srgb,var(--color-accent) 6%,transparent),transparent 60%)}
+.demo-stage.col{flex-direction:column;align-items:stretch}
+.demo-code{display:none;margin:0;padding:16px 18px;background:#12131d;border-top:1px solid var(--color-divider);
+  font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c7cbe0;overflow-x:auto}
+.demo-code.open{display:block}
+.demo-code .tag{color:#8f9bd6}.demo-code .atr{color:#c9a978}.demo-code .cls{color:#9fd6bb}
+
+/* ═══ Components (dogfooded) ═══ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;text-decoration:none;
+  font-family:var(--font-heading);font-weight:500;font-size:14px;line-height:1.2;color:var(--color-text);
+  background:transparent;border:1px solid transparent;padding:var(--s2) calc(var(--s3)*1.2);border-radius:var(--radius-md);
+  transition:background .12s}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-primary{color:var(--color-accent);border-color:var(--color-accent)}
+.btn-primary:hover{background:color-mix(in srgb,var(--color-accent) 12%,transparent)}
+.btn-primary:active{background:color-mix(in srgb,var(--color-accent) 22%,transparent)}
+.btn-secondary{border-color:var(--color-divider)}
+.btn-secondary:hover{background:color-mix(in srgb,var(--color-text) 7%,transparent)}
+.btn-ghost{color:var(--color-accent);padding-inline:var(--s1)}
+.btn-ghost:hover{background:color-mix(in srgb,var(--color-accent) 10%,transparent)}
+.btn-danger{background:var(--color-danger);color:var(--color-danger-ink);font-weight:600}
+.btn-danger:hover{background:var(--color-danger-hover)}
+.btn-icon{width:36px;height:36px;padding:0}
+.btn-block{width:100%}
+
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:.02em;padding:3px 10px;border-radius:6px}
+.tag-accent{background:var(--color-accent-800);color:var(--color-accent-100)}
+.tag-neutral{background:var(--color-neutral-800);color:var(--color-neutral-100)}
+.tag-outline{border:1px solid var(--color-accent);color:var(--color-accent)}
+.tag-danger{background:color-mix(in srgb,var(--color-danger) 20%,transparent);color:var(--color-danger-100)}
+.tag-success{background:color-mix(in srgb,var(--color-success) 18%,transparent);color:var(--color-success-300)}
+.tag-caution{background:color-mix(in srgb,var(--color-caution) 18%,transparent);color:var(--color-caution-300)}
+
+.field{width:100%;max-width:320px}
+.field>label{display:block;font-size:12px;margin-bottom:5px;color:var(--ink-70)}
+.input{width:100%;min-height:36px;padding:6px 10px;font:inherit;font-size:14px;color:var(--color-text);
+  caret-color:var(--color-accent);background:var(--color-bg);border:1px solid var(--color-divider);border-radius:var(--radius-md)}
+.input:hover{border-color:color-mix(in srgb,var(--color-text) 45%,transparent)}
+.input:focus-visible{border-color:var(--color-accent);outline-offset:0}
+.radio{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:14px}
+.radio input{position:absolute;opacity:0;width:0;height:0}
+.radio .dot{width:16px;height:16px;flex:none;border-radius:50%;border:1.5px solid var(--color-divider)}
+.radio:hover .dot{border-color:var(--color-accent)}
+.radio input:checked+.dot{border-color:var(--color-accent);background:var(--color-accent);box-shadow:inset 0 0 0 4px var(--color-bg)}
+.radio input:focus-visible+.dot{outline:2px solid var(--color-accent);outline-offset:2px}
+.seg{display:inline-flex;overflow:hidden;border:1px solid var(--color-divider);border-radius:var(--radius-md)}
+.seg-opt{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;font-size:13px;cursor:pointer;color:var(--ink-70)}
+.seg-opt input{position:absolute;opacity:0;width:0;height:0}
+.seg-opt+.seg-opt{border-left:1px solid var(--color-divider)}
+.seg-opt:has(input:checked){color:var(--color-accent);box-shadow:inset 0 0 0 1px var(--color-accent)}
+.seg-opt:not(:has(input:checked)):hover{background:color-mix(in srgb,var(--color-text) 7%,transparent)}
+
+.card{display:flex;flex-direction:column;gap:var(--s2);padding:var(--s3) var(--s4);border-radius:var(--radius-md);
+  background:var(--color-surface-2);max-width:280px}
+.card-kicker{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent)}
+.card-title{font-weight:500;font-size:17px;line-height:1.2}
+.card-body{margin:0;font-size:13px;color:var(--ink-70);flex:1}
+.card-meta{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-45)}
+.elev-sm{box-shadow:var(--shadow-sm)}.elev-md{box-shadow:var(--shadow-md)}.elev-lg{box-shadow:var(--shadow-lg)}
+
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px 4px 8px;border-radius:999px;
+  font-size:12.5px;background:var(--color-bg);box-shadow:var(--shadow-sm);cursor:pointer}
+.status-pill .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.status-pill.is-success .dot{background:var(--color-success)}
+.status-pill.is-caution .dot{background:var(--color-caution)}
+.status-pill.is-danger .dot{background:var(--color-danger)}
+
+.status{border-radius:var(--radius-md);padding:12px 14px;font-size:13px;width:100%}
+.status-success{background:var(--color-success-tint);box-shadow:inset 0 0 0 1px var(--color-success-edge);color:var(--color-success-300)}
+.status-caution{background:var(--color-caution-tint);box-shadow:inset 0 0 0 1px var(--color-caution-edge);color:var(--color-caution-300)}
+.status-danger{background:var(--color-danger-tint);box-shadow:inset 0 0 0 1px var(--color-danger-edge);color:var(--color-danger-100)}
+
+.alert{display:flex;align-items:center;gap:10px;padding:7px 8px 7px 12px;border-radius:10px;width:100%;
+  background:var(--color-danger-tint);box-shadow:inset 0 0 0 1px var(--color-danger-edge)}
+.alert-text{font-size:12.5px;color:var(--color-danger-100);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.alert-call{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;background:var(--color-danger);
+  color:var(--color-danger-ink);font-weight:600;font-size:13px;padding:6px 12px;border-radius:8px;text-decoration:none;
+  border:0;cursor:pointer;animation:fb-halo 3.4s ease-in-out infinite}
+.alert-call:hover{background:var(--color-danger-hover)}
+
+.timer{display:flex;align-items:center;gap:10px;padding:12px;border-radius:var(--radius-md);
+  background:var(--color-success-tint);box-shadow:inset 0 0 0 1px var(--color-success-edge)}
+.timer-value{font-size:22px;font-weight:600;color:var(--color-success-300);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.timer-label{font-size:11px;color:var(--color-success-300);opacity:.85;line-height:1.3}
+
+/* dose card */
+.dose{background:var(--color-surface-2);border-radius:var(--radius-lg);padding:var(--s6);box-shadow:var(--shadow-sm);width:100%;max-width:320px}
+.dose .kick{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--s2)}
+.dose .allergen{display:flex;align-items:center;gap:10px;margin-bottom:var(--s4)}
+.dose .ic-box{width:38px;height:38px;border-radius:10px;background:var(--color-accent-800);color:var(--color-accent-300);display:grid;place-items:center;flex:none;font-size:20px}
+.dose h4{font-size:20px}.dose .sub{font-size:12px;color:var(--ink-55)}
+
+/* dialog */
+.dialog-backdrop{position:fixed;inset:0;z-index:60;display:none;place-items:center;padding:18px;
+  background:color-mix(in srgb,#000 55%,transparent);backdrop-filter:blur(2px)}
+.dialog-backdrop.open{display:grid}
+.dialog{width:min(420px,100%);display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:14px;
+  background:var(--color-surface);box-shadow:var(--shadow-lg);animation:fb-rise .18s ease}
+.dialog h4{font-size:19px}.dialog p{font-size:14px;color:var(--ink-70)}
+.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
+
+/* color grids */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;width:100%}
+.sw{border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm);background:var(--color-bg);cursor:pointer}
+.sw .chip{height:56px}
+.sw .meta{padding:7px 10px 9px}
+.sw .nm{font-size:12px;font-weight:500}
+.sw .hx{font-size:11px;color:var(--ink-55);font-variant-numeric:tabular-nums;text-transform:uppercase}
+.ramp{display:flex;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm);width:100%}
+.ramp span{flex:1;height:40px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;font-size:9px;color:rgba(0,0,0,.5);font-variant-numeric:tabular-nums}
+.ramp span.dk{color:rgba(255,255,255,.55)}
+.ramp-wrap{width:100%}.ramp-wrap+.ramp-wrap{margin-top:14px}
+.ramp-lab{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-55);margin-bottom:5px}
+
+/* semantic cards */
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;width:100%}
+.sem{border-radius:14px;padding:16px}
+.sem .role{font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+.sem h4{font-size:15px;display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.sem p{font-size:12.5px;line-height:1.5}
+.sem-success{background:color-mix(in srgb,var(--color-success) 12%,var(--color-surface));box-shadow:inset 0 0 0 1px var(--color-success-edge)}
+.sem-success h4,.sem-success .role,.sem-success p{color:var(--color-success-300)}
+.sem-caution{background:color-mix(in srgb,var(--color-caution) 12%,var(--color-surface));box-shadow:inset 0 0 0 1px var(--color-caution-edge)}
+.sem-caution h4,.sem-caution .role,.sem-caution p{color:var(--color-caution-300)}
+.sem-danger{background:color-mix(in srgb,var(--color-danger) 12%,var(--color-surface));box-shadow:inset 0 0 0 1px var(--color-danger-edge)}
+.sem-danger h4{color:var(--color-danger-100)}.sem-danger .role,.sem-danger p{color:var(--color-danger-300)}
+
+/* type scale */
+.type-row{display:flex;align-items:baseline;gap:16px;padding:10px 0;
+  background:linear-gradient(to right,color-mix(in srgb,var(--color-text) 9%,transparent),color-mix(in srgb,var(--color-text) 9%,transparent) calc(100% - 40px),transparent) no-repeat bottom/100% 1px}
+.type-row .spec{margin-left:auto;flex:none;font-size:11px;color:var(--ink-45);font-variant-numeric:tabular-nums}
+
+/* tokens table */
+.tok{width:100%;border-collapse:collapse;font-size:13px}
+.tok td{padding:8px 10px;border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%,transparent)}
+.tok td:first-child{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--color-accent-300);white-space:nowrap;cursor:pointer}
+.tok td:last-child{color:var(--ink-55)}
+.tok .cbox{display:inline-block;width:16px;height:16px;border-radius:4px;vertical-align:-3px;margin-right:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+
+/* live app phone frame */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%}
+.phone{width:100%;max-width:380px;aspect-ratio:9/18.5;border-radius:34px;padding:9px;background:#0c0d15;
+  box-shadow:var(--shadow-lg),0 30px 60px rgba(0,0,0,.5)}
+.phone iframe{width:100%;height:100%;border:0;border-radius:26px;background:var(--color-bg)}
+.phone-hint{font-size:12.5px;color:var(--ink-45);text-align:center;max-width:44ch}
+
+/* do/don't */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
+.rules h4{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-45);margin-bottom:10px}
+.rules ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.rules li{display:flex;gap:9px;font-size:13px;line-height:1.45;color:var(--ink-70)}
+.rules li .ic{flex:none;margin-top:2px}
+.rules .do .ic{color:var(--color-success-300)}.rules .dont .ic{color:var(--color-danger-300)}
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:80;
+  background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-lg);
+  padding:10px 16px;border-radius:10px;font-size:13px;display:flex;align-items:center;gap:8px;pointer-events:none;
+  animation:toast-in .2s ease}
+#toast .ic{color:var(--color-success-300)}
+
+footer{border-top:1px solid var(--color-divider);padding:32px 0 60px;color:var(--ink-45);font-size:12.5px}
+footer .disc{color:var(--ink-55);max-width:56ch;line-height:1.5;margin-bottom:12px}
+footer code{color:var(--color-accent-300)}
+
+/* ═══ Responsive ═══ */
+@media (max-width:860px){
+  .sidebar{position:fixed;top:var(--topbar-h);left:0;bottom:0;z-index:35;background:var(--color-bg);
+    transform:translateX(-100%);transition:transform .22s ease;box-shadow:var(--shadow-lg)}
+  .sidebar.open{transform:none}
+  .scrim.open{display:block}
+  .menu-btn{display:grid}
+  .brand .sub{display:none}
+  .topbar .ghost .lbl{display:none}
+}
+@media (max-width:560px){
+  .stat-band{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr}
+  .demo-stage{padding:20px 16px}
+  .content{padding:0 15px 100px}
+  .hero{padding:40px 0 30px}
+}
+</style>
+</head>
+<body>
+
+<!-- ░░ SVG icon sprite ░░ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9.3-9C1.3 8 2.7 4.7 6 4.7c2 0 3.2 1.3 4 2.6.8-1.3 2-2.6 4-2.6 3.3 0 4.7 3.3 3.3 6.3C19 15.4 12 20 12 20z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-heartbeat" viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 9 2-4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 3.5L21.5 20H2.5L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9.5v4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1.1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-warning-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1.1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-x-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 4.5c-1 0-2 .9-2 2 0 7 6 13 13 13 1.1 0 2-1 2-2v-2.3l-3.7-1.4-1.6 1.9c-2.4-1.1-4.3-3-5.4-5.4l1.9-1.6L9.8 4.5H6.5z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-egg" viewBox="0 0 24 24"><path d="M12 3.5c3.3 0 6 4.7 6 8.7a6 6 0 11-12 0c0-4 2.7-8.7 6-8.7z" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-swatch" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h5v13a4 4 0 11-8 0V6z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-type" viewBox="0 0 24 24"><path d="M5 7V5h14v2M12 5v14M9 19h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-shapes" viewBox="0 0 24 24"><circle cx="8" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 9 2-4h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-form" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="i-window" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 8h16" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="i-phone-device" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 18h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h9a2 2 0 012 2v14H7a2 2 0 01-2-2V4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8h5M9 12h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="i-external" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-8 8M18 14v4a1.5 1.5 0 01-1.5 1.5h-10A1.5 1.5 0 015 18V8a1.5 1.5 0 011.5-1.5H10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-github" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 015 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0012 2z" fill="currentColor" stroke="none"/></symbol>
+</defs></svg>
+
+<!-- ░░ Top bar ░░ -->
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation"><svg class="ic"><use href="#i-menu"/></svg></button>
+  <a class="brand" href="#top">
+    <span class="mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><ellipse cx="12" cy="4.9" rx="2.5" ry="3.4"/><ellipse cx="6.4" cy="15.4" rx="4.1" ry="1.35" transform="rotate(-12 6.4 15.4)"/><ellipse cx="17.6" cy="15.4" rx="4.1" ry="1.35" transform="rotate(12 17.6 15.4)"/><path d="M12 8.3 V 21.5" stroke-width="2.2"/></svg></span>
+    First Bites <span class="sub">· Design System</span>
+  </a>
+  <span class="spacer"></span>
+  <a class="ghost" href="app/" target="_blank" rel="noopener"><svg class="ic"><use href="#i-phone-device"/></svg><span class="lbl">Live app</span></a>
+  <a class="ghost" href="https://github.com/JeffTrakk/bows-spoonsFirstBites" target="_blank" rel="noopener"><svg class="ic"><use href="#i-github"/></svg><span class="lbl">GitHub</span></a>
+</div>
+
+<div class="layout" id="top">
+  <!-- ░░ Sidebar ░░ -->
+  <nav class="sidebar" id="sidebar">
+    <div class="grp">Foundations</div>
+    <a href="#colour" class="nav-link"><svg class="ic"><use href="#i-swatch"/></svg>Colour</a>
+    <a href="#semantics" class="nav-link"><svg class="ic"><use href="#i-pulse"/></svg>Health status</a>
+    <a href="#ramps" class="nav-link"><svg class="ic"><use href="#i-shapes"/></svg>Tonal ramps</a>
+    <a href="#type" class="nav-link"><svg class="ic"><use href="#i-type"/></svg>Typography</a>
+    <div class="grp">Components</div>
+    <a href="#buttons" class="nav-link"><svg class="ic"><use href="#i-shapes"/></svg>Buttons &amp; tags</a>
+    <a href="#forms" class="nav-link"><svg class="ic"><use href="#i-form"/></svg>Forms</a>
+    <a href="#cards" class="nav-link"><svg class="ic"><use href="#i-card"/></svg>Cards</a>
+    <a href="#status" class="nav-link"><svg class="ic"><use href="#i-pulse"/></svg>Status &amp; alerts</a>
+    <a href="#dialog" class="nav-link"><svg class="ic"><use href="#i-window"/></svg>Dialog</a>
+    <div class="grp">Product</div>
+    <a href="#app" class="nav-link"><svg class="ic"><use href="#i-phone-device"/></svg>Live app</a>
+    <a href="#tokens" class="nav-link"><svg class="ic"><use href="#i-code"/></svg>Tokens</a>
+    <a href="#principles" class="nav-link"><svg class="ic"><use href="#i-book"/></svg>Do &amp; don't</a>
+  </nav>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ░░ Content ░░ -->
+  <main class="content">
+    <header class="hero">
+      <div class="eyebrow"><svg class="ic"><use href="#i-heartbeat"/></svg>Bows and Spoons · First Bites</div>
+      <h1>Design System<br><span class="dim">&amp; component library</span></h1>
+      <p class="lede">Every component in the First Bites infant-allergy app, live and interactive. A quiet, dense dark interface — Inter, an 8px grid, one blurple accent — carrying a three-voice health-status palette where colour tells a parent to <strong style="color:var(--color-success-300);font-weight:600">carry on</strong>, <strong style="color:var(--color-caution-300);font-weight:600">watch closely</strong>, or <strong style="color:var(--color-danger-300);font-weight:600">call 911</strong>.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#buttons"><svg class="ic"><use href="#i-shapes"/></svg>Browse components</a>
+        <a class="btn btn-secondary" href="app/" target="_blank" rel="noopener"><svg class="ic"><use href="#i-phone-device"/></svg>Open the live app</a>
+      </div>
+      <div class="stat-band">
+        <div class="cell"><div class="n">24</div><div class="l">Component demos</div></div>
+        <div class="cell"><div class="n">3</div><div class="l">Semantic voices</div></div>
+        <div class="cell"><div class="n">60+</div><div class="l">Design tokens</div></div>
+      </div>
+    </header>
+
+    <!-- COLOUR -->
+    <section class="sec" id="colour">
+      <div class="sec-head"><span class="num">01</span><h2>Colour</h2></div>
+      <p class="sec-desc">A near-neutral blue-grey world — no pure black, no pure white. One blurple accent used as line and glow, never a flood. Tap any swatch to copy its hex.</p>
+      <div class="demo"><div class="demo-head"><span class="t">Core roles</span></div>
+        <div class="demo-stage col"><div class="swatches" id="coreSwatches"></div></div>
+      </div>
+    </section>
+
+    <!-- SEMANTICS -->
+    <section class="sec" id="semantics">
+      <div class="sec-head"><span class="num">02</span><h2>Health-status semantics</h2></div>
+      <p class="sec-desc">The layer that makes this a medical companion, not a to-do list. Three first-class voices — never the accent, never each other. A parent reads the colour before the words.</p>
+      <div class="demo"><div class="demo-head"><span class="t">The three voices</span></div>
+        <div class="demo-stage col"><div class="sem-grid">
+          <div class="sem sem-success"><div class="role">Safe · tolerated</div><h4><svg class="ic"><use href="#i-check-circle"/></svg>Success</h4><p>Dose taken, watch window clear, no reaction. Sage green — reassuring, not loud.</p></div>
+          <div class="sem sem-caution"><div class="role">Mild · watch</div><h4><svg class="ic"><use href="#i-warning"/></svg>Caution</h4><p>Mild reaction, review pending, watch running. Amber — attention, not alarm.</p></div>
+          <div class="sem sem-danger"><div class="role">Severe · emergency</div><h4><svg class="ic"><use href="#i-warning-circle"/></svg>Danger</h4><p>Reaction plan, 911, severe symptoms. Coral — the loudest voice, reserved for it.</p></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- RAMPS -->
+    <section class="sec" id="ramps">
+      <div class="sec-head"><span class="num">03</span><h2>Tonal ramps</h2></div>
+      <p class="sec-desc">Generated in OKLCH on one shared lightness scale, so the same step of any role has the same visual weight. Contrast comes from value, not saturation. Tap a step to copy it.</p>
+      <div class="demo"><div class="demo-head"><span class="t">Neutral &amp; accent · 100–900</span></div>
+        <div class="demo-stage col">
+          <div class="ramp-wrap"><div class="ramp-lab"><span>Neutral</span><span>100 → 900</span></div><div class="ramp" id="rampNeutral"></div></div>
+          <div class="ramp-wrap"><div class="ramp-lab"><span>Accent (blurple)</span><span>100 → 900</span></div><div class="ramp" id="rampAccent"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPE -->
+    <section class="sec" id="type">
+      <div class="sec-head"><span class="num">04</span><h2>Typography</h2></div>
+      <p class="sec-desc">Inter over Inter. Hierarchy is size and space — never weight past 500. Body sits at 15px / 1.55 near a 65-character measure.</p>
+      <div class="demo"><div class="demo-head"><span class="t">Type scale</span></div>
+        <div class="demo-stage col">
+          <div class="type-row"><div style="font-size:42px;letter-spacing:-.02em">Baby profile</div><div class="spec">42 / 500 · h1</div></div>
+          <div class="type-row"><div style="font-size:32px;letter-spacing:-.015em">Today's dose</div><div class="spec">32 / 500 · h2</div></div>
+          <div class="type-row"><div style="font-size:25px">Egg — dose 2 of 3</div><div class="spec">25 / 500 · h3</div></div>
+          <div class="type-row"><div style="font-size:20px">Watch window</div><div class="spec">20 / 500 · h4</div></div>
+          <div class="type-row"><div style="font-size:15px;font-weight:400;max-width:46ch">Body copy carries the diary, guidance and notes at a comfortable reading measure.</div><div class="spec">15 / 400 · body</div></div>
+          <div class="type-row"><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-55)">Kit&nbsp;#4B-2291</div><div class="spec">11 / 500 · label</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUTTONS -->
+    <section class="sec" id="buttons">
+      <div class="sec-head"><span class="num">05</span><h2>Buttons &amp; tags</h2></div>
+      <p class="sec-desc">Actions are accent outlines — the one exception is the filled danger button, because in an emergency it must win. Click a button to see its toast; toggle the code view with <svg class="ic" style="color:var(--ink-55)"><use href="#i-code"/></svg>.</p>
+      <div class="demo">
+        <div class="demo-head"><span class="t">Buttons <small>· click me</small></span><div class="tools"><button class="icon-btn code-toggle" aria-label="Toggle code"><svg class="ic"><use href="#i-code"/></svg></button></div></div>
+        <div class="demo-stage">
+          <button class="btn btn-primary" data-toast="Marked taken"><svg class="ic"><use href="#i-check"/></svg>Mark taken</button>
+          <button class="btn btn-secondary" data-toast="Skipped">Skip</button>
+          <button class="btn btn-ghost" data-toast="Details">Details</button>
+          <button class="btn btn-danger" data-toast="Calling 911…"><svg class="ic"><use href="#i-phone"/></svg>Call 911</button>
+          <button class="btn btn-icon btn-secondary" data-toast="Added" aria-label="Add"><svg class="ic"><use href="#i-plus"/></svg></button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+        </div>
+        <pre class="demo-code"><span class="tag">&lt;button</span> <span class="atr">class</span>=<span class="cls">"btn btn-primary"</span><span class="tag">&gt;</span>Mark taken<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;button</span> <span class="atr">class</span>=<span class="cls">"btn btn-danger"</span><span class="tag">&gt;</span>Call 911<span class="tag">&lt;/button&gt;</span></pre>
+      </div>
+      <div class="demo">
+        <div class="demo-head"><span class="t">Tags</span><div class="tools"><button class="icon-btn code-toggle" aria-label="Toggle code"><svg class="ic"><use href="#i-code"/></svg></button></div></div>
+        <div class="demo-stage">
+          <span class="tag tag-accent">Accent</span>
+          <span class="tag tag-neutral">Neutral</span>
+          <span class="tag tag-outline">Outline</span>
+          <span class="tag tag-success"><svg class="ic"><use href="#i-check-circle"/></svg>Tolerated</span>
+          <span class="tag tag-caution">Mild</span>
+          <span class="tag tag-danger"><svg class="ic"><use href="#i-warning-circle"/></svg>Severe</span>
+        </div>
+        <pre class="demo-code"><span class="tag">&lt;span</span> <span class="atr">class</span>=<span class="cls">"tag tag-success"</span><span class="tag">&gt;</span>Tolerated<span class="tag">&lt;/span&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section class="sec" id="forms">
+      <div class="sec-head"><span class="num">06</span><h2>Forms</h2></div>
+      <p class="sec-desc">Native elements, themed states — no browser defaults. The segmented control and radios below actually work.</p>
+      <div class="demo">
+        <div class="demo-head"><span class="t">Inputs &amp; choices <small>· interactive</small></span></div>
+        <div class="demo-stage col" style="gap:18px">
+          <div class="field"><label for="babyName">Baby's name</label><input class="input" id="babyName" placeholder="e.g. Mira" value="Mira"></div>
+          <div>
+            <label style="display:block;font-size:12px;margin-bottom:6px;color:var(--ink-70)">Today's view</label>
+            <div class="seg" id="viewSeg">
+              <label class="seg-opt"><input type="radio" name="view" checked><svg class="ic"><use href="#i-card"/></svg>Focus</label>
+              <label class="seg-opt"><input type="radio" name="view"><svg class="ic"><use href="#i-form"/></svg>Checklist</label>
+            </div>
+          </div>
+          <div style="display:flex;gap:18px;flex-wrap:wrap">
+            <label class="radio"><input type="radio" name="dose" checked><span class="dot"></span>¼ teaspoon</label>
+            <label class="radio"><input type="radio" name="dose"><span class="dot"></span>½ teaspoon</label>
+            <label class="radio"><input type="radio" name="dose"><span class="dot"></span>Full dose</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="sec" id="cards">
+      <div class="sec-head"><span class="num">07</span><h2>Cards &amp; elevation</h2></div>
+      <p class="sec-desc">Surface-filled content cards with a kicker, title, body and meta row. Elevation on this dark ground is a hairline edge plus ambient darkness — never a stack of heavy shadows.</p>
+      <div class="demo"><div class="demo-head"><span class="t">Content card &amp; the three elevation steps</span></div>
+        <div class="demo-stage">
+          <div class="card elev-sm">
+            <span class="card-kicker">Day 12</span>
+            <span class="card-title">Egg introduced</span>
+            <p class="card-body">Second dose tolerated with no reaction across the two-hour watch window.</p>
+            <span class="card-meta"><svg class="ic"><use href="#i-clock"/></svg>2h ago · logged</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="card elev-sm" style="max-width:180px"><span class="card-title" style="font-size:14px">elev-sm</span></div>
+            <div class="card elev-md" style="max-width:180px"><span class="card-title" style="font-size:14px">elev-md</span></div>
+            <div class="card elev-lg" style="max-width:180px"><span class="card-title" style="font-size:14px">elev-lg</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATUS & ALERTS -->
+    <section class="sec" id="status">
+      <div class="sec-head"><span class="num">08</span><h2>Status &amp; alerts</h2></div>
+      <p class="sec-desc">The health-status patterns from the app. Use the switcher to move a status surface through its three voices; the watch-window timer below runs live.</p>
+
+      <div class="demo">
+        <div class="demo-head"><span class="t">Status surface <small>· switch the voice</small></span></div>
+        <div class="demo-stage col">
+          <div class="seg" id="statusSeg" style="align-self:flex-start">
+            <label class="seg-opt"><input type="radio" name="sev" value="success" checked>Safe</label>
+            <label class="seg-opt"><input type="radio" name="sev" value="caution">Mild</label>
+            <label class="seg-opt"><input type="radio" name="sev" value="danger">Severe</label>
+          </div>
+          <div class="status status-success" id="statusSurface"><strong id="statusTitle" style="font-weight:600">No reaction</strong> — watch window clear, dose tolerated. Carry on with the ladder.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="status-pill is-success" data-toast="No reaction"><span class="dot"></span>No reaction</span>
+            <span class="status-pill is-caution" data-toast="Mild — watching"><span class="dot"></span>Mild — watching</span>
+            <span class="status-pill is-danger" data-toast="Reaction logged"><span class="dot"></span>Reaction logged</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-head"><span class="t">Emergency bar <small>· pinned to every screen</small></span></div>
+        <div class="demo-stage col">
+          <div class="alert">
+            <svg class="ic" style="color:var(--color-danger);font-size:17px"><use href="#i-warning-circle"/></svg>
+            <span class="alert-text">Trouble breathing, swelling lips, floppy baby — <strong style="color:var(--color-danger-100);font-weight:600">call 911 now</strong>.</span>
+            <button class="alert-call" data-toast="Calling 911…"><svg class="ic"><use href="#i-phone"/></svg>911</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-head"><span class="t">Dose card &amp; live watch-window timer</span></div>
+        <div class="demo-stage">
+          <div class="dose">
+            <div class="kick">Today · Day 12</div>
+            <div class="allergen"><div class="ic-box"><svg class="ic"><use href="#i-egg"/></svg></div><div><h4>Egg</h4><div class="sub">Dose 2 of 3 · ¼ teaspoon</div></div></div>
+            <div class="timer">
+              <svg class="ic" style="color:var(--color-success-300);font-size:20px"><use href="#i-clock"/></svg>
+              <div class="timer-value" id="watchTimer">2:00:00</div>
+              <div class="timer-label">Watch window<br>clear so far</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIALOG -->
+    <section class="sec" id="dialog">
+      <div class="sec-head"><span class="num">09</span><h2>Dialog</h2></div>
+      <p class="sec-desc">A modal at the top elevation over a dimmed backdrop. Opens on click; closes on the backdrop, the button, or Escape.</p>
+      <div class="demo"><div class="demo-head"><span class="t">Modal <small>· try it</small></span></div>
+        <div class="demo-stage">
+          <button class="btn btn-primary" id="openDialog"><svg class="ic"><use href="#i-window"/></svg>Open dialog</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE APP -->
+    <section class="sec" id="app">
+      <div class="sec-head"><span class="num">10</span><h2>The live app</h2></div>
+      <p class="sec-desc">Every component above, in its real context — the standalone First Bites companion running right here. This is the uploaded build, served at <code style="font-size:12px;color:var(--color-accent-300)">/app</code> on deploy.</p>
+      <div class="demo"><div class="demo-head"><span class="t">First Bites <small>· interactive</small></span><div class="tools"><a class="icon-btn" href="app/" target="_blank" rel="noopener" aria-label="Open full screen"><svg class="ic"><use href="#i-external"/></svg></a></div></div>
+        <div class="demo-stage col" style="align-items:center">
+          <div class="phone-wrap">
+            <div class="phone"><iframe id="appFrame" title="First Bites app" loading="lazy" src="about:blank" data-src="app/"></iframe></div>
+            <p class="phone-hint">Runs entirely in your browser — a prototype, not a medical device. <a href="app/" target="_blank" rel="noopener">Open full screen ↗</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENS -->
+    <section class="sec" id="tokens">
+      <div class="sec-head"><span class="num">11</span><h2>Tokens</h2></div>
+      <p class="sec-desc">The source of truth lives in <code style="font-size:12px;color:var(--color-accent-300)">design-system/tokens.css</code>. Tap a token name to copy it.</p>
+      <div class="demo"><div class="demo-head"><span class="t">Reference</span></div>
+        <div class="demo-stage col" style="padding:6px 14px">
+          <table class="tok"><tbody id="tokTable"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="sec" id="principles">
+      <div class="sec-head"><span class="num">12</span><h2>Do &amp; don't</h2></div>
+      <div class="demo"><div class="demo-stage col">
+        <div class="rules">
+          <div class="do"><h4>Do</h4><ul>
+            <li><svg class="ic"><use href="#i-check-circle"/></svg>Reserve each semantic voice for its meaning — danger is the emergency, never a highlight.</li>
+            <li><svg class="ic"><use href="#i-check-circle"/></svg>Outline primary actions; let the accent live in lines, focus rings and glow.</li>
+            <li><svg class="ic"><use href="#i-check-circle"/></svg>Lean on the ramps for surfaces, borders and muted text — value carries hierarchy.</li>
+            <li><svg class="ic"><use href="#i-check-circle"/></svg>Keep the compact 0.70× spacing; this interface is dense on purpose.</li>
+          </ul></div>
+          <div class="dont"><h4>Don't</h4><ul>
+            <li><svg class="ic"><use href="#i-x-circle"/></svg>Flood large areas with the accent or any saturated fill.</li>
+            <li><svg class="ic"><use href="#i-x-circle"/></svg>Use pure black or white, or bolden headings past 500.</li>
+            <li><svg class="ic"><use href="#i-x-circle"/></svg>Style a status with the accent, or borrow one voice for another.</li>
+            <li><svg class="ic"><use href="#i-x-circle"/></svg>Stack heavy shadows; elevation is a hairline edge plus ambient darkness.</li>
+          </ul></div>
+        </div>
+      </div></div>
+    </section>
+
+    <footer>
+      <p class="disc"><strong style="color:var(--ink-70)">Not a medical device.</strong> This companion app does not diagnose allergy. Clinician instructions always take precedence over anything shown in the app.</p>
+      First Bites Design System · tokens in <code>design-system/tokens.css</code> · built on the Nocturne foundation
+    </footer>
+  </main>
+</div>
+
+<!-- ░░ Dialog ░░ -->
+<div class="dialog-backdrop" id="dialogBackdrop">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+    <h4 id="dlgTitle">Log a reaction?</h4>
+    <p>This opens the symptom logger for <strong style="color:var(--color-text)">Egg · dose 2</strong>. You can attach a photo and set severity. The emergency plan stays one tap away.</p>
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" data-close-dialog>Cancel</button>
+      <button class="btn btn-primary" data-close-dialog data-toast="Opening logger…"><svg class="ic"><use href="#i-check"/></svg>Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+  /* ---- toast ---- */
+  var toastTimer;
+  function toast(msg){
+    var t=$('#toast'); if(t) t.remove();
+    t=document.createElement('div'); t.id='toast';
+    t.innerHTML='<svg class="ic"><use href="#i-check-circle"/></svg>'+msg;
+    document.body.appendChild(t);
+    clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.remove()},1900);
+  }
+  function copy(text){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){toast('Copied '+text)},function(){toast(text)});
+    } else { toast(text); }
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-toast]'); if(b) toast(b.getAttribute('data-toast'));
+  });
+
+  /* ---- mobile nav ---- */
+  var sidebar=$('#sidebar'), scrim=$('#scrim');
+  function closeNav(){sidebar.classList.remove('open');scrim.classList.remove('open')}
+  $('#menuBtn').addEventListener('click',function(){sidebar.classList.toggle('open');scrim.classList.toggle('open')});
+  scrim.addEventListener('click',closeNav);
+  $$('.nav-link').forEach(function(a){a.addEventListener('click',closeNav)});
+
+  /* ---- scroll-spy ---- */
+  var links=$$('.nav-link'), map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var obs=new IntersectionObserver(function(ents){
+    ents.forEach(function(en){
+      if(en.isIntersecting){
+        links.forEach(function(l){l.classList.remove('active')});
+        var id=en.target.id; if(map[id]) map[id].classList.add('active');
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  $$('section.sec').forEach(function(s){obs.observe(s)});
+
+  /* ---- code toggles ---- */
+  $$('.code-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var code=btn.closest('.demo').querySelector('.demo-code');
+      if(code){var open=code.classList.toggle('open');btn.classList.toggle('on',open);}
+    });
+  });
+
+  /* ---- colour data ---- */
+  var core=[
+    ['Background','#161826','--color-bg'],['Surface','#232532','--color-surface'],
+    ['Text','#e9e9ed','--color-text'],['Accent','#9184d9','--color-accent'],
+    ['Border','#3f424d','--color-neutral-800'],['Danger','#d9736a','--color-danger'],
+    ['Success','#5fae87','--color-success'],['Caution','#d0a05c','--color-caution']
+  ];
+  var cs=$('#coreSwatches');
+  core.forEach(function(c){
+    var el=document.createElement('button');
+    el.className='sw'; el.type='button'; el.title='Copy '+c[1];
+    el.innerHTML='<div class="chip" style="background:'+c[1]+'"></div><div class="meta"><div class="nm">'+c[0]+'</div><div class="hx">'+c[1]+'</div></div>';
+    el.addEventListener('click',function(){copy(c[1])});
+    cs.appendChild(el);
+  });
+
+  /* ---- ramps ---- */
+  function ramp(id,steps){
+    var wrap=$(id);
+    steps.forEach(function(c,i){
+      var s=document.createElement('span');
+      s.style.background=c; s.textContent=(i+1)+'00';
+      if(i>=3) s.className='dk';
+      s.title='Copy '+c;
+      s.addEventListener('click',function(){copy(c)});
+      wrap.appendChild(s);
+    });
+  }
+  ramp('#rampNeutral',['#f3f5fe','#e4e7f5','#cfd3e5','#b2b6ca','#9397ab','#75798c','#595d6c','#3f424d','#292b31']);
+  ramp('#rampAccent',['#f5f4ff','#e7e5fe','#d2cefd','#b5abfc','#968ae0','#796cbf','#5d5294','#423a6a','#2b2741']);
+
+  /* ---- status switcher ---- */
+  var surf=$('#statusSurface'), stTitle=$('#statusTitle');
+  var COPY={
+    success:['status status-success','No reaction','watch window clear, dose tolerated. Carry on with the ladder.'],
+    caution:['status status-caution','Mild reaction','a few hives, settling. Note it and keep watching the window.'],
+    danger:['status status-danger','Reaction logged','spreading hives and vomiting. Open the reaction plan now.']
+  };
+  $$('#statusSeg input').forEach(function(r){
+    r.addEventListener('change',function(){
+      var c=COPY[r.value];
+      surf.className=c[0]; stTitle.textContent=c[1];
+      surf.lastChild.textContent=' — '+c[2];
+    });
+  });
+
+  /* ---- live watch-window timer (counts down from 2h, demo speed) ---- */
+  var tEl=$('#watchTimer'), secs=2*3600;
+  function tick(){
+    secs-=1; if(secs<0) secs=2*3600;
+    var h=Math.floor(secs/3600), m=Math.floor((secs%3600)/60), s=secs%60;
+    tEl.textContent=h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  }
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduce) setInterval(tick,1000);
+
+  /* ---- dialog ---- */
+  var backdrop=$('#dialogBackdrop');
+  function openDlg(){backdrop.classList.add('open')}
+  function closeDlg(){backdrop.classList.remove('open')}
+  $('#openDialog').addEventListener('click',openDlg);
+  backdrop.addEventListener('click',function(e){if(e.target===backdrop)closeDlg()});
+  $$('[data-close-dialog]').forEach(function(b){b.addEventListener('click',closeDlg)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDlg()});
+
+  /* ---- tokens table ---- */
+  var toks=[
+    ['--color-bg','#161826'],['--color-surface','#232532'],['--color-text','#e9e9ed'],
+    ['--color-accent','#9184d9'],['--color-danger','#d9736a'],['--color-success','#5fae87'],
+    ['--color-caution','#d0a05c'],['--font-body','Inter · 400 / 500'],
+    ['--space-3 / 6 / 8','8.4 · 16.8 · 22.4px (0.70×)'],['--radius-md / lg','8 · 14px'],
+    ['--radius-pill','999px'],['--shadow-sm/md/lg','edge + ambient darkness']
+  ];
+  var tt=$('#tokTable');
+  toks.forEach(function(t){
+    var tr=document.createElement('tr');
+    var isColor=/^#/.test(t[1]);
+    var val=isColor?'<span class="cbox" style="background:'+t[1]+'"></span>'+t[1]:t[1];
+    tr.innerHTML='<td title="Copy">'+t[0]+'</td><td>'+val+'</td>';
+    tr.firstChild.addEventListener('click',function(){copy(t[0])});
+    tt.appendChild(tr);
+  });
+
+  /* ---- lazy-load the app iframe when scrolled into view ---- */
+  var frame=$('#appFrame');
+  if(frame){
+    var fo=new IntersectionObserver(function(ents){
+      ents.forEach(function(en){
+        if(en.isIntersecting){frame.src=frame.getAttribute('data-src');fo.disconnect();}
+      });
+    },{rootMargin:'200px'});
+    fo.observe(frame);
+  }
+})();
+</script>
+</body>
+</html>

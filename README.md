@@ -21,13 +21,42 @@ python3 -m http.server 8000
 A prebuilt single-file version that works offline with no server lives at
 `export/Bows and Spoons First Bites (standalone).html`.
 
+## Component library & website
+
+`index.html` at the repo root is an **interactive, mobile-friendly component library** —
+every component in the design system, live: clickable buttons with toasts, a working
+segmented control and radios, tap-to-copy colour swatches and tokens, a status-voice
+switcher, a live watch-window timer, a modal dialog, and the standalone app embedded in a
+phone frame. It's a static, zero-dependency page (the design tokens are inlined; icons are
+an inline SVG sprite), so it runs anywhere you serve the folder.
+
+```
+python3 -m http.server 8000
+# component library:  http://localhost:8000/
+# the live app:       http://localhost:8000/app/
+```
+
+### Deploy to Vercel
+
+The repo is a static site — no build step. Either:
+
+- **Dashboard** — import the GitHub repo at [vercel.com/new](https://vercel.com/new);
+  Framework Preset **Other**, no build command, output directory `.` (root). Deploy.
+- **CLI** — `npm i -g vercel` then `vercel` from the repo root.
+
+`vercel.json` sets clean URLs and cache headers. After deploy: `/` is the component
+library and `/app` is the live First Bites app.
+
 ## Layout
 
 | Path | What it is |
 | --- | --- |
-| `Bows and Spoons First Bites.dc.html` | The whole app — markup, logic class and tweakable props in one file |
+| `index.html` | Interactive component-library website (the Vercel homepage) |
+| `vercel.json` | Static-deploy config — clean URLs and cache headers |
+| `app/index.html` | The live standalone First Bites app, served at `/app` |
+| `Bows and Spoons First Bites.dc.html` | The app source — markup, logic class and tweakable props in one file |
 | `support.js` | Runtime that mounts the component (React, template compiler) |
-| `_ds/nocturne-…/` | Nocturne design system — tokens stylesheet and component bundle |
+| `design-system/` | First Bites design system — tokens, the component stylesheet, a living style guide and the written guide |
 | `export/` | Prebuilt standalone HTML |
 
 The app file has three parts: the template (markup between `<x-dc>` tags), a `class Component`
