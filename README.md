@@ -27,7 +27,7 @@ A prebuilt single-file version that works offline with no server lives at
 | --- | --- |
 | `Bows and Spoons First Bites.dc.html` | The whole app — markup, logic class and tweakable props in one file |
 | `support.js` | Runtime that mounts the component (React, template compiler) |
-| `_ds/nocturne-…/` | Nocturne design system — tokens stylesheet and component bundle |
+| `design-system/` | First Bites design system — tokens, the component stylesheet, a living style guide and the written guide |
 | `export/` | Prebuilt standalone HTML |
 
 The app file has three parts: the template (markup between `<x-dc>` tags), a `class Component`
